@@ -55,7 +55,7 @@ export default function LessonPlanForm() {
     }
 
     try {
-      const dataToStore = { ...formData, assessment: formData.assessment.name || "" };
+    const dataToStore = { ...formData, assessment: formData.assessment ? formData.assessment.name : "" };
       await setDoc(doc(db, "InputDetails", uid), dataToStore, { merge: true });
       alert("Lesson Plan Saved Successfully!");
     } catch (error) {
@@ -65,6 +65,7 @@ export default function LessonPlanForm() {
   };
 
   console.log(formData)
+  console.log(uid)
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
