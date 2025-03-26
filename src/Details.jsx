@@ -2,7 +2,7 @@ import { db, auth } from '../firebase';
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GraduationCap, BookOpen, FileText, FilePlus, Pencil, Mic, Clock, Layers, LayoutList, Text } from "lucide-react";
 
 export default function LessonPlanForm() {
@@ -91,6 +91,41 @@ export default function LessonPlanForm() {
       <div className="mb-4">
         <label className="block flex items-center gap-2"><Clock size={18} /> Duration of lesson (in minutes):</label>
         <input type="number" value={formData.duration} onChange={(e) => setFormData({ ...formData, duration: e.target.value })} className="w-full p-2 mt-1 border rounded" />
+      </div>
+
+      <div className="mb-4">
+        <label className="block flex items-center gap-2"><Layers size={18} /> Number of lessons to generate:</label>
+        <input type="number" onChange={(e) => setFormData({ ...formData, lessons: e.target.value })} className="w-full p-2 mt-1 border rounded" />
+      </div>
+      
+      <div className="mb-4">
+        <label className="block flex items-center gap-2"><LayoutList size={18} /> Content type:</label>
+        <select onChange={(e) => setFormData({ ...formData, contentType: e.target.value })} className="w-full p-2 mt-1 border rounded">
+          <option value="Fiction">Fiction</option>
+          <option value="Non-fiction">Non-fiction</option>
+        </select>
+      </div>
+      
+      <div className="mb-4">
+        <label className="block flex items-center gap-2"><Text size={18} /> Specify Theme:</label>
+        <select onChange={(e) => setFormData({ ...formData, theme: e.target.value })} className="w-full p-2 mt-1 border rounded">
+          <option value="Friendship, Family, and Community">Friendship, Family, and Community</option>
+          <option value="Identity and Belonging">Identity and Belonging</option>
+          <option value="Exploration and Curiosity">Exploration and Curiosity</option>
+          <option value="Problem-Solving and Decision-Making">Problem-Solving and Decision-Making</option>
+          <option value="Creative and Expressive Thinking">Creative and Expressive Thinking</option>
+          <option value="Health, Sustainability, and Global Awareness">Health, Sustainability, and Global Awareness</option>
+        </select>
+      </div>
+      
+      <div className="mb-4">
+        <label className="block flex items-center gap-2"><FileText size={18} /> Interactivity Scale (1-5):</label>
+        <input type="range" min="1" max="5" value={formData.interactivity} onChange={(e) => setFormData({ ...formData, interactivity: Number(e.target.value) })} className="w-full" />
+      </div>
+      
+      <div className="mb-4">
+        <label className="block flex items-center gap-2"><FilePlus size={18} /> Specific Teaching Objectives:</label>
+        <textarea onChange={(e) => setFormData({ ...formData, objectives: e.target.value })} className="w-full p-2 mt-1 border rounded h-24"></textarea>
       </div>
 
       <div className="mb-4">
