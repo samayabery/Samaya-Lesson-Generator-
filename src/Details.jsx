@@ -6,6 +6,12 @@ import { useState, useEffect } from "react";
 import { GraduationCap, BookOpen, FileText, FilePlus, Pencil, Mic, Clock, Layers, LayoutList, Text } from "lucide-react";
 
 export default function LessonPlanForm() {
+
+  const apiKey = import.meta.env.VITE_GPT_KEY;
+ const apiUrl = "https://api.openai.com/v1/chat/completions";
+
+
+
   const [formData, setFormData] = useState({
     grade: "",
     reading: 3,
@@ -49,20 +55,49 @@ export default function LessonPlanForm() {
   };
 
   const handleSubmit = async () => {
+    const prompt = `Here is the user input:\n${JSON.stringify(formData, null, 2)}`;
+  
     if (!uid) {
       alert("You must be logged in to submit details.");
       return;
     }
-
+  
     try {
-      const dataToStore = { ...formData, assessment: formData.assessment.name || "" };
+      const dataToStore = { ...formData, assessment: formData.assessment?.name || "" };
       await setDoc(doc(db, "InputDetails", uid), dataToStore, { merge: true });
       alert("Lesson Plan Saved Successfully!");
+  
+      try {
+        const response = await fetch(apiUrl, {  
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}` 
+          },
+          body: JSON.stringify({
+            model: "gpt-4-turbo",
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+  
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+        }
+  
+        const data = await response.json();
+        console.log("GPT Response:", data);
+        
+      } catch (error) {
+        console.error("Error submitting data to GPT:", error);
+        alert("Failed to get a response from GPT.");
+      }
+  
     } catch (error) {
       console.error("Error saving lesson plan: ", error);
-      alert("Failed to save lesson plan");
+      alert("Failed to save lesson plan.");
     }
   };
+
 
   console.log(formData)
 
