@@ -55,7 +55,17 @@ export default function LessonPlanForm() {
   };
 
   const handleSubmit = async () => {
-    const prompt = `Here is the user input:\n${JSON.stringify(formData, null, 2)}`;
+    const prompt = `
+    
+    
+    Here is the user input:
+
+    //add whatever you've made for prompt here
+
+    
+    
+    
+    Educator Input Provided: \n${JSON.stringify(formData, null, 2)}`;
   
     if (!uid) {
       alert("You must be logged in to submit details.");
@@ -85,7 +95,7 @@ export default function LessonPlanForm() {
         }
   
         const data = await response.json();
-        console.log("GPT Response:", data);
+        console.log("GPT Response:", data.choices[0].message.content);
         
       } catch (error) {
         console.error("Error submitting data to GPT:", error);
