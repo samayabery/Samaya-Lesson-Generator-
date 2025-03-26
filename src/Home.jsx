@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { InfiniteMovingCards } from "../src/components/ui/infinite-moving-cards";
-import MyComponent from "./Background";
 
 export default function Home() {
   
@@ -18,7 +17,7 @@ export default function Home() {
 
   return ( 
     <>
-    <MyComponent/>
+
     <div className="flex justify-center items-center text-4xl pb-[15vh] pt-[25vh]"> 
       Counter...
     </div>
