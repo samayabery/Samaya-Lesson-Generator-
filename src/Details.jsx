@@ -2,7 +2,7 @@ import { db, auth } from '../firebase';
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from 'axios';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GraduationCap, BookOpen, FileText, FilePlus, Pencil, Mic, Clock, Layers, LayoutList, Text } from "lucide-react";
 
 export default function LessonPlanForm() {
