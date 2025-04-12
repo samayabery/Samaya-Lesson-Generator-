@@ -10,6 +10,12 @@ export default function LessonPlanForm() {
   const apiKey = import.meta.env.VITE_GPT_KEY;
  const apiUrl = "https://api.openai.com/v1/chat/completions";
 
+ // api call
+
+ // phone number (url)
+ //reason to call (why do we need third party)
+ // do you give gossip (POST) or do you take gossip (GET- POSTING INPUT and GETTING OUTPUT)
+ // what gossip (Content: input as well as output)
 
 
   const [formData, setFormData] = useState({
@@ -57,14 +63,34 @@ export default function LessonPlanForm() {
   const handleSubmit = async () => {
     const prompt = `
     
-    
     Here is the user input:
 
-    //add whatever you've made for prompt here
+    You are an expert educationist trained in child development, literacy pedagogy, and curriculum design, with the empathy of a grassroots teacher and the precision of a Harvard professor.
+    Create a detailed, engaging, high-caliber lesson plan for students in Indian government schools, based on the input provided by the educator. Use the exemplar given as a basis BUT make it more detailed to ensure it is the most beneficial it can be for the children. Use simple language, multisensory engagement, and interactive tasks to suit resource-limited classrooms.
 
-    
-    
-    
+    Structure your response EXACTLY in the following format:
+    SESSION NUMBER:
+    SESSION TITLE:
+    SESSION DURATION:
+    DATE:
+    OBJECTIVE:
+    CONCEPT COVERED:
+    LESSON FLOW
+    * ICEBREAKER
+    * SYNOPSIS OF WRITTEN PIECE (short book/story/poem)
+    * READ ALOUD (teacher and/or students)
+    * EXPLICIT COMPREHENSION (short factual Q&A)
+    * TASKS (2 out of VOCABULARY, GRAMMAR AND IMPLICIT COMPREHENSION SHOULD INCLUDE A DETAILED ACTIVITY TO FULFIL THE TASK - ENSURE ALL DETAILS ARE GIVEN (LIKE IF IT IS VOCABULARY FLASHCARDS, WHAT ARE THE SPECIFIC WORDS ON THE FLASHCARDS ETC) 
+        * VOCABULARY (include 4–5 new words with child-friendly meanings) 
+        * GRAMMAR (choose level-appropriate concept like adjectives, verbs, etc.)
+        * IMPLICIT COMPREHENSION (discussion prompts related to real life, central theme)
+        * WRITTEN TASK (sentence or paragraph based on theme, with scaffolding)
+        * CREATIVE ASSIGNMENT (drawing, making, speaking)
+    * RELATED MATERIALS (mention any printables, visuals, word cards, worksheets)
+    Think deeply, design thoughtfully, and prioritize clarity, empathy, and engagement.
+    🔽 Educator Input - already below 
+    🔽 Lesson Plan Exemplar -
+
     Educator Input Provided: \n${JSON.stringify(formData, null, 2)}`;
   
     if (!uid) {
@@ -74,10 +100,13 @@ export default function LessonPlanForm() {
   
     try {
       const dataToStore = { ...formData, assessment: formData.assessment?.name || "" };
+      
       await setDoc(doc(db, "InputDetails", uid), dataToStore, { merge: true });
+      console.log("firebase successful")
       alert("Lesson Plan Saved Successfully!");
   
       try {
+        
         const response = await fetch(apiUrl, {  
           method: "POST",
           headers: {
@@ -89,14 +118,20 @@ export default function LessonPlanForm() {
             messages: [{ role: "user", content: prompt }]
           })
         });
+
+        console.log(prompt)
+
   
         if (!response.ok) {
           throw new Error(`API Error: ${response.status} - ${response.statusText}`);
         }
+
   
         const data = await response.json();
+        console.log(data)
         console.log("GPT Response:", data.choices[0].message.content);
         
+
       } catch (error) {
         console.error("Error submitting data to GPT:", error);
         alert("Failed to get a response from GPT.");
@@ -107,6 +142,19 @@ export default function LessonPlanForm() {
       alert("Failed to save lesson plan.");
     }
   };
+
+//   try{
+//     //firebase
+//     try{
+//       //gpt
+//     }
+//     catch{
+//       //error for gpt
+//     }
+//   }
+//   catch{
+// // error for fireabase 
+//   }
 
 
   console.log(formData)
