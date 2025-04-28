@@ -17,6 +17,20 @@ export default function LessonPlanForm() {
  // do you give gossip (POST) or do you take gossip (GET- POSTING INPUT and GETTING OUTPUT)
  // what gossip (Content: input as well as output)
 
+ async function saveGptResponse(userId1, gptResponseContent) {
+  try {
+    const userDocRef = doc(db, "InputDetails", userId1);
+
+    await updateDoc(docRef, {
+      lessons_generated: arrayUnion(gptResponseContent)
+    });
+
+    console.log("GPT response saved successfully!");
+  } catch (error) {
+    console.error("Error saving GPT response: ", error);
+  }
+}
+
 
   const [formData, setFormData] = useState({
     grade: "",
@@ -130,6 +144,8 @@ export default function LessonPlanForm() {
         const data = await response.json();
         console.log(data)
         console.log("GPT Response:", data.choices[0].message.content);
+
+        saveGptResponse(userId, data.choices[0].message.content)
         
 
       } catch (error) {
