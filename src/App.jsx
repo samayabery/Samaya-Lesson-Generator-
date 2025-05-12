@@ -1,9 +1,11 @@
-
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import Home from './Home';
 import Login from './login';
 import LessonPlanForm from './Details';
+import LessonsHistory from './LessonsHistory';
+import LessonDetail from './Details';
+import TopNav from './components/TopNav';
 
 
 function App() {
@@ -12,16 +14,15 @@ function App() {
       <>
 
          <BrowserRouter>
-
-         <Routes>
+           <TopNav />
+           <Routes>
              <Route path="/home" element={<Home />} />
              <Route path="/login" element={<Login />} />
              <Route path="/details" element={<LessonPlanForm/>} />
-
-             
-          </Routes>
-
-          </BrowserRouter>
+             <Route path="/lessons" element={<LessonsHistory />} />
+             <Route path="/lessons/:index" element={<LessonDetail />} />
+           </Routes>
+         </BrowserRouter>
       </>
     )
   }

@@ -1,13 +1,15 @@
 import { db, auth } from '../firebase';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { GraduationCap, BookOpen, FileText, FilePlus, Pencil, Mic, Clock, Layers, LayoutList, Text } from "lucide-react";
 
 export default function LessonPlanForm() {
 
   const apiKey = import.meta.env.VITE_GPT_KEY;
+  console.log(apiKey)
  const apiUrl = "https://api.openai.com/v1/chat/completions";
 
  // api call
@@ -21,11 +23,12 @@ export default function LessonPlanForm() {
   try {
     const userDocRef = doc(db, "InputDetails", userId1);
 
-    await updateDoc(docRef, {
+    await updateDoc(userDocRef, {
       lessons_generated: arrayUnion(gptResponseContent)
     });
 
     console.log("GPT response saved successfully!");
+    navigate('/lessons', { state: { selected: previousCount } });
   } catch (error) {
     console.error("Error saving GPT response: ", error);
   }
@@ -48,6 +51,9 @@ export default function LessonPlanForm() {
   });
 
   const [uid, setUid] = useState ()
+  const [generatedPlan, setGeneratedPlan] = useState("");
+  const [generatedLessons, setGeneratedLessons] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -67,7 +73,9 @@ export default function LessonPlanForm() {
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
-        setFormData(userDoc.data());
+        const data = userDoc.data();
+        setFormData(data);
+        setGeneratedLessons(data.lessons_generated || []);
       }
     } catch (error) {
       console.error("Error fetching details: ", error);
@@ -143,9 +151,12 @@ export default function LessonPlanForm() {
   
         const data = await response.json();
         console.log(data)
-        console.log("GPT Response:", data.choices[0].message.content);
-
-        saveGptResponse(userId, data.choices[0].message.content)
+        const content = data.choices[0].message.content;
+        console.log("GPT Response:", content);
+        const previousCount = generatedLessons.length;
+        await saveGptResponse(uid, content);
+        setGeneratedLessons(prev => [...prev, content]);
+        navigate('/lessons', { state: { selected: previousCount } });
         
 
       } catch (error) {
@@ -243,6 +254,19 @@ export default function LessonPlanForm() {
       </div>
 
       <button onClick={handleSubmit} className="w-full p-3 bg-blue-500 text-white rounded hover:bg-blue-600">Generate Lesson Plan</button>
+
+      {generatedPlan && (
+        <div className="mt-8 p-4 bg-white rounded shadow">
+          <h3 className="text-xl font-semibold mb-2">Generated Lesson Plan</h3>
+          <pre className="whitespace-pre-wrap">{generatedPlan}</pre>
+          <button
+            onClick={() => navigate('/lessons')}
+            className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            View Previous Lessons
+          </button>
+        </div>
+      )}
     </div>
   );
 }
