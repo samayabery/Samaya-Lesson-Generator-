@@ -156,7 +156,7 @@ export default function LessonPlanForm() {
         const previousCount = generatedLessons.length;
         await saveGptResponse(uid, content);
         setGeneratedLessons(prev => [...prev, content]);
-        navigate('/lessons', { state: { selected: previousCount } });
+        navigate(`/lessons/${previousCount}`);
         
 
       } catch (error) {
