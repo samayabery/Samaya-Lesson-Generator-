@@ -16,7 +16,7 @@ function App() {
          <BrowserRouter>
            <TopNav />
            <Routes>
-             <Route path="/home" element={<Home />} />
+             <Route path="/" element={<Login />} />
              <Route path="/login" element={<Login />} />
              <Route path="/details" element={<LessonPlanForm/>} />
              <Route path="/lessons" element={<LessonsHistory />} />

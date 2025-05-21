@@ -21,7 +21,7 @@ function Login() {
       if (user) {
         // User is signed in
         setIsLoggedIn(true);
-        navigate('/home')
+        navigate('/details');
       } else {
         // User is signed out
         setIsLoggedIn(false);
@@ -39,7 +39,7 @@ function Login() {
       await createUserWithEmailAndPassword(auth, email, password);
       
       toast.success("Signed up successfully!");
-      navigate('/home')
+      navigate('/details');
 
     } catch (err) {
       console.error(err);
@@ -52,6 +52,7 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       
       toast.success("Signed in successfully!");
+      navigate('/details');
     } catch (error) {
       console.error('Error signing in:', error.code, error.message);
       toast.error(error.message);
@@ -72,7 +73,7 @@ function Login() {
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate('/home')
+      navigate('/details');
 
      
       toast.success("Signed in with Google successfully!");

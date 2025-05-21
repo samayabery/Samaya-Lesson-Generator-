@@ -10,7 +10,7 @@ export default function LessonDetail() {
   const [rawLessons, setRawLessons] = useState([]);
   const [lesson, setLesson] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
-  const [pendingRevision, setPendingRevision] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const navigate = useNavigate();
 
@@ -47,6 +47,7 @@ export default function LessonDetail() {
 
   const handleSubmitFeedback = async () => {
     if (!lesson) return;
+    setIsLoading(true);
     const prompt = `Revise the following lesson plan based on the user feedback.\n\nOriginal Lesson Plan:\n${lesson.content}\n\nFeedback:\n${feedbackText}`;
     try {
       const apiKey = import.meta.env.VITE_GPT_KEY;
@@ -61,33 +62,16 @@ export default function LessonDetail() {
       });
       if (!res.ok) throw new Error(`API Error: ${res.status}`);
       const data = await res.json();
-      setPendingRevision({ content: data.choices[0].message.content });
-    } catch (error) {
-      console.error('Error requesting revision:', error);
-      alert('Failed to get revised lesson.');
-    }
-  };
-
-  const acceptRevision = async () => {
-    if (!pendingRevision || !uid) return;
-    try {
+      const revised = data.choices[0].message.content;
       const docRef = doc(db, 'InputDetails', uid);
-      await updateDoc(docRef, {
-        lessons_generated: arrayUnion({ content: pendingRevision.content, createdAt: serverTimestamp() })
-      });
-      fetchLessons(uid);
-      setPendingRevision(null);
-      setShowFeedbackForm(false);
-      setFeedbackText("");
+      await updateDoc(docRef, { lessons_generated: arrayUnion({ content: revised, createdAt: serverTimestamp() }) });
+      setIsLoading(false);
+      navigate('/lessons');
     } catch (error) {
-      console.error('Error saving accepted revision:', error);
-      alert('Failed to save revision.');
+      console.error('Error generating revised lesson:', error);
+      setIsLoading(false);
+      alert('Failed to regenerate lesson.');
     }
-  };
-
-  const rejectRevision = () => {
-    setPendingRevision(null);
-    setShowFeedbackForm(true);
   };
 
   const handleDelete = async () => {
@@ -104,6 +88,12 @@ export default function LessonDetail() {
   };
 
   return (
+    <>
+    {isLoading && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="animate-spin h-16 w-16 border-4 border-t-4 border-indigo-500 rounded-full"></div>
+      </div>
+    )}
     <div className="mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
       <button onClick={() => navigate('/lessons')} className="mb-4 text-blue-600 hover:underline">
         ← Back to Lesson Plans
@@ -111,7 +101,7 @@ export default function LessonDetail() {
       {lesson ? (
         <div className="p-4 bg-white rounded shadow">
           <pre className="whitespace-pre-wrap mb-4">{lesson.content}</pre>
-          {!pendingRevision ? (
+          {!isLoading && (
             <>
               <div className="flex gap-2 mb-4">
                 <button onClick={() => setShowFeedbackForm(true)} className="p-2 bg-green-500 text-white rounded">
@@ -135,24 +125,12 @@ export default function LessonDetail() {
                 </div>
               )}
             </>
-          ) : (
-            <div className="mt-4 p-4 bg-gray-50 rounded">
-              <h3 className="text-lg font-semibold mb-2">Proposed Revision</h3>
-              <pre className="whitespace-pre-wrap">{pendingRevision.content}</pre>
-              <div className="flex gap-2 mt-2">
-                <button onClick={acceptRevision} className="p-2 bg-blue-500 text-white rounded">
-                  Accept
-                </button>
-                <button onClick={rejectRevision} className="p-2 bg-gray-500 text-white rounded">
-                  Provide More Feedback
-                </button>
-              </div>
-            </div>
           )}
         </div>
       ) : (
         <p>Lesson not found.</p>
       )}
     </div>
+    </>
   );
 } 

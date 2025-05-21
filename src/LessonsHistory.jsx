@@ -126,75 +126,59 @@ ${feedbackText}
   };
 
   return (
-    <div className="mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-      <h2 className="text-center text-2xl font-bold mb-4">Previous Lesson Plans</h2>
-      {lessons.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto mb-4">
-          {lessons.map((l, idx) => (
-            <button
-              key={idx}
-              onClick={() => { setSelectedIndex(idx); setShowFeedbackForm(false); setPendingRevision(null); setFeedbackText(""); }}
-              className={`px-4 py-2 rounded ${selectedIndex === idx ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
-            >
-              {l.title} {l.createdAt ? `- ${l.createdAt.toLocaleDateString()}` : ''}
-            </button>
-          ))}
-        </div>
-      )}
-      {lessons[selectedIndex] ? (
-        <div className="p-4 bg-white rounded shadow">
-          <pre className="whitespace-pre-wrap mb-4">{lessons[selectedIndex].content}</pre>
-          {!pendingRevision ? (
-            <>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setShowFeedbackForm(true)}
-                  className="mt-2 p-2 bg-green-500 text-white rounded"
-                >
-                  Give Feedback
-                </button>
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 p-6">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
+        <h2 className="text-center text-4xl font-extrabold text-indigo-600 mb-8">Lesson History</h2>
+        {lessons.length > 0 && (
+          <div className="flex flex-wrap gap-4 justify-center mb-8">
+            {lessons.map((l, idx) => (
+              <button
+                key={idx}
+                onClick={() => { setSelectedIndex(idx); setShowFeedbackForm(false); setPendingRevision(null); setFeedbackText(""); }}
+                className={`px-6 py-2 rounded-full font-medium transition ${selectedIndex===idx? 'bg-indigo-600 text-white shadow-lg' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+              >
+                {l.title}{l.createdAt? ` - ${l.createdAt.toLocaleDateString()}` : ''}
+              </button>
+            ))}
+          </div>
+        )}
+        {lessons[selectedIndex] ? (
+          <div className="p-6 bg-indigo-50 rounded-xl shadow-inner">
+            <pre className="whitespace-pre-wrap mb-6 text-gray-800 leading-relaxed">{lessons[selectedIndex].content}</pre>
+            {!pendingRevision ? (
+              <div className="flex gap-4 justify-end">
                 <button
                   onClick={() => handleDelete(selectedIndex)}
-                  className="mt-2 p-2 bg-red-500 text-white rounded"
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
                 >
                   Delete Plan
                 </button>
+                <button
+                  onClick={() => setShowFeedbackForm(true)}
+                  className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+                >
+                  Give Feedback
+                </button>
               </div>
-              {showFeedbackForm && (
-                <div className="mt-4">
-                  <textarea
-                    value={feedbackText}
-                    onChange={e => setFeedbackText(e.target.value)}
-                    className="w-full p-2 border rounded h-24"
-                    placeholder="Enter feedback"
-                  />
-                  <button
-                    onClick={handleSubmitFeedback}
-                    className="mt-2 p-2 bg-blue-500 text-white rounded"
-                  >
-                    Submit Feedback
+            ) : (
+              <div className="mt-6 p-6 bg-white rounded-lg border border-gray-200">
+                <h3 className="text-lg font-semibold mb-2 text-indigo-700">Proposed Revision</h3>
+                <pre className="whitespace-pre-wrap mb-4 text-gray-800">{pendingRevision.content}</pre>
+                <div className="flex gap-4">
+                  <button onClick={acceptRevision} className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                    Accept
+                  </button>
+                  <button onClick={rejectRevision} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+                    More Feedback
                   </button>
                 </div>
-              )}
-            </>
-          ) : (
-            <div className="mt-4 p-4 bg-gray-50 rounded">
-              <h3 className="text-lg font-semibold mb-2">Proposed Revision</h3>
-              <pre className="whitespace-pre-wrap">{pendingRevision.content}</pre>
-              <div className="flex gap-2 mt-2">
-                <button onClick={acceptRevision} className="p-2 bg-blue-500 text-white rounded">
-                  Accept
-                </button>
-                <button onClick={rejectRevision} className="p-2 bg-gray-500 text-white rounded">
-                  Provide More Feedback
-                </button>
               </div>
-            </div>
-          )}
-        </div>
-      ) : (
-        <p>No lessons generated yet.</p>
-      )}
+            )}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500">No lessons generated yet.</p>
+        )}
+      </div>
     </div>
   );
 }

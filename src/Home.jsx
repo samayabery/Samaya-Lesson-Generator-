@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { InfiniteMovingCards } from "../src/components/ui/infinite-moving-cards";
 
 export default function Home() {
   
