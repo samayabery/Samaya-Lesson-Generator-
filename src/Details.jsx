@@ -473,7 +473,7 @@ Ensure FLN levels shape every decision: complexity of story, word choice, writin
                 </div>
 
                 <div>
-                  <h4 className="font-semibold mb-1 text-pink-500">LEVEL 5: Short Paragraph Level</h4>
+                  <h4 className="font-semibold mb-1 ">LEVEL 5: Short Paragraph Level</h4>
                   <ul className="list-disc list-inside space-y-1 mb-2">
                     <li>Read passages at 30 wpm with correct pronunciation.</li>
                     <li>Explain passages in own words.</li>

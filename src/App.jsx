@@ -6,6 +6,7 @@ import LessonPlanForm from './Details';
 import LessonsHistory from './LessonsHistory';
 import LessonDetail from './Details';
 import TopNav from './components/TopNav';
+import Homepage from './components/Homepage';
 
 
 function App() {
@@ -14,13 +15,12 @@ function App() {
       <>
 
          <BrowserRouter>
-           <TopNav />
            <Routes>
-             <Route path="/" element={<Login />} />
-             <Route path="/login" element={<Login />} />
-             <Route path="/details" element={<LessonPlanForm/>} />
-             <Route path="/lessons" element={<LessonsHistory />} />
-             <Route path="/lessons/:index" element={<LessonDetail />} />
+             <Route path="/" element={<Homepage />} />
+             <Route path="/login" element={<><TopNav /><Login /></>} />
+             <Route path="/details" element={<><TopNav /><LessonPlanForm/></>} />
+             <Route path="/lessons" element={<><TopNav /><LessonsHistory /></>} />
+             <Route path="/lessons/:index" element={<><TopNav /><LessonDetail /></>} />
            </Routes>
          </BrowserRouter>
       </>
