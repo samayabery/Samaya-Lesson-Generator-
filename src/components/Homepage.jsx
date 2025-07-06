@@ -15,7 +15,8 @@ import {
   Lightbulb,
   Globe,
   Menu,
-  X
+  X,
+  HelpCircle
 } from 'lucide-react';
 
 export default function Homepage() {
@@ -46,10 +47,10 @@ export default function Homepage() {
   ];
 
   const stats = [
-    { number: "70%", label: "Improvement in Reading Skills" },
-    { number: "1000+", label: "Teachers Empowered" },
-    { number: "50,000+", label: "Students Reached" },
-    { number: "85%", label: "Teacher Satisfaction" }
+    { number: "69.13%", label: "of total schools in India are government schools" },
+    { number: "54%", label: "of the total student population in the country study in government schools" },
+    { number: "44.8%", label: "of Grade V students in government schools can read Grade 2-level texts" },
+    { number: "1000+", label: "Teachers Empowered" }
   ];
 
   return (
@@ -186,47 +187,72 @@ export default function Homepage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Mission</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Bridging the educational gap by providing teachers with tools to create inclusive, 
-              level-appropriate learning experiences for every child.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+              Rooted in Classrooms. Powered by Code.
+            </p>
+            <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+              Empowering educators in underserved Indian classrooms and equipping them to create personalised, English Language learning experiences aligned with India's Foundational Literacy and Numeracy Framework for multilevel learners in single-teacher classrooms.
             </p>
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-yellow-100">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-12">
               <div>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                  Every Child Deserves Quality Education
+                  Personalised Learning
                 </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-gray-600">
-                      <strong>Personalized Learning:</strong> Adapt content to individual reading and writing levels
-                    </p>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-gray-600">
-                      <strong>Teacher Empowerment:</strong> Simple tools that save time and improve lesson quality
-                    </p>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-gray-600">
-                      <strong>Inclusive Education:</strong> Ensuring no child is left behind regardless of their starting point
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-8 text-center border border-yellow-200">
-                <Globe className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-gray-900 mb-2">Global Impact</h4>
-                <p className="text-gray-600">
-                  Supporting educators worldwide in creating meaningful learning experiences 
-                  that transform communities one lesson at a time.
+                <p className="text-gray-600 leading-relaxed">
+                  Adapting content to each learner's level (reading, writing, speaking and listening) through a curated database of successfully tested, classroom-ready prototypes.
                 </p>
               </div>
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                  Empowered Teaching
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Providing easy-to-navigate tools that save time and improve lesson quality - enabling educators to make learning more meaningful, relevant, and responsive to every child.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story Section */}
+      <section id="about" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Story</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Leader. Innovator. Believer.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-xl p-8 md:p-12 border border-yellow-100">
+            <div className="max-w-4xl mx-auto">
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                I believe in the power of stories to transform learning. One word at a time. One student at a time.
+              </p>
+              
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Hi! My name is Samaya M. Bery, and I am a 17-year-old, Grade 12 student at The Shri Ram School Moulsari. An avid reader, I express myself through writing poetry, classical dance and building meaningful connections with the world around me.
+              </p>
+              
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                My vision is to build beyond myself, to reimagine what learning can look like for every child, and to create a future where education is not bound by infrastructure, but powered by intention.
+              </p>
+              
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                My journey in education began not in a classroom but in a conversation with an enthusiastic 10-year-old who had a mind full of ideas but struggled to articulate them fluently in English. Limited resources and a lack of personalised learning impede quality education for a majority of underprivileged students in India. This sparked the beginning of a reading program.
+              </p>
+              
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Batton Batton Mein came into being in March 2023 for Grade 4 and 5 government school students. My initiative supports India's Foundational Literacy and Numeracy (FLN) framework by developing customised lesson plans that nurture both verbal and non-verbal expression. I began by mentoring a focus group of 10 high-level Grade 5 learners and expanded to a multilevel classroom setting of 40 Grade 4 students. But as the classroom grew, so did the challenge: the need for differentiated, level-appropriate content. I realised scaling personalised learning would require more than passion; it would necessitate a tool.
+              </p>
+              
+              <p className="text-gray-700 leading-relaxed">
+                To scale impact and enhance accessibility, I learnt JavaScript and developed iLesson, an AI-powered web app that helps educators, both teachers and volunteers, seamlessly access a database of curated, adaptive lesson plans tailored to their students' specific learning pace and skill level. This tool alleviates the burden on educators while ensuring equitable, high-quality education in resource-limited schools. By integrating AI-driven customisation, I aim to bridge the educational divide and make joyful, personalised learning accessible to every child.
+              </p>
             </div>
           </div>
         </div>
@@ -283,6 +309,16 @@ export default function Homepage() {
           </button>
         </div>
       </section>
+
+      {/* Help Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button 
+          className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-4 rounded-full shadow-lg hover:from-yellow-600 hover:to-orange-600 transition-all duration-200 flex items-center justify-center group"
+          onClick={() => alert('Help functionality coming soon!')}
+        >
+          <HelpCircle className="w-6 h-6" />
+        </button>
+      </div>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">

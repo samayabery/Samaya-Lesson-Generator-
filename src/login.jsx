@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, signInWithPopup, signOut, signInWithEma
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from 'react-router-dom'
+import { BookOpen } from "lucide-react";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -11,9 +12,6 @@ function Login() {
   const [LoggedIn, setIsLoggedIn] = useState(true);
   const [isSignIn, setIsSignIn] = useState(true);
   const navigate = useNavigate();
-
-
-  
 
   useEffect(() => {
     // Set up an authentication state observer
@@ -31,8 +29,6 @@ function Login() {
     // Clean up the observer on component unmount
     return () => unsubscribe();
   }, []);
-
-  
 
   const signUp = async () => {
     try {
@@ -83,90 +79,99 @@ function Login() {
     }
   };
 
- 
-
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center p-6">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl border border-orange-100 w-96">
+        {/* Logo Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg p-3">
+              <BookOpen className="w-8 h-8 text-white" />
+            </div>
+            <span className="text-3xl font-bold text-gray-900">iLesson</span>
+          </div>
+          <p className="text-gray-600">Welcome back! Please sign in to continue.</p>
+        </div>
       
-            {!LoggedIn && 
+        {!LoggedIn && 
+        <>
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </h2>
+
+          {!LoggedIn && (
+            <button
+              onClick={signInWithGoogle}
+              className="w-full p-3 border-2 border-orange-200 font-medium text-orange-700 rounded-lg mb-4 hover:bg-orange-50 transition-colors"
+            >
+              Sign in with Google
+            </button>
+          )}
+
+          <input
+            aria-label="Email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+          />
+          <input
+            aria-label="Password"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+          />
+
+          {isSignIn ? (
             <>
-              <h2 className="text-2xl font-semibold mb-16 text-center text-black">
-          {isSignIn ? "Sign In" : "Sign Up"}
-        </h2>
-
-        {!LoggedIn && (
-          <button
-            onClick={signInWithGoogle}
-            className="p-2 border-2 border-black font-medium text-black rounded w-full mb-4"
-          >
-            Sign in with Google
-          </button>
-        )}
-
-        <input
-          aria-label="Email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-        />
-        <input
-          aria-label="Password"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-        />
-
-        {isSignIn ? (
-          <>
-            <button
-              onClick={signIn}
-              className="w-full p-2 mb-4 bg-black text-white rounded hover:bg-gray-800 transition-colors"
-            >
-              Sign in
-            </button>
-            <div className="text-center text-sm">
-              New user?{" "}
               <button
-              
-                className="text-blue-500 hover:underline"
+                onClick={signIn}
+                className="w-full p-3 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
               >
-                Sign up
+                Sign In
               </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={signUp}
-              className="w-full p-2 mb-4 bg-black text-white rounded hover:bg-gray-800 transition-colors"
-            >
-              Sign Up
-            </button>
-            <div className="text-center text-sm">
-              Already Registered?{" "}
+              <div className="text-center text-sm text-gray-600">
+                New user?{" "}
+                <button
+                  onClick={() => setIsSignIn(false)}
+                  className="text-orange-600 hover:text-orange-800 hover:underline font-medium"
+                >
+                  Sign up
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
               <button
-                
-                className="text-blue-500 hover:underline"
+                onClick={signUp}
+                className="w-full p-3 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
               >
-                Sign in
+                Sign Up
               </button>
-            </div>
-          </>
-        )}</>}
+              <div className="text-center text-sm text-gray-600">
+                Already Registered?{" "}
+                <button
+                  onClick={() => setIsSignIn(true)}
+                  className="text-orange-600 hover:text-orange-800 hover:underline font-medium"
+                >
+                  Sign in
+                </button>
+              </div>
+            </>
+          )}
+        </>}
 
         {LoggedIn && (
           <>
-          <div className="text-center"> See you soon</div>
-          <button
-            onClick={logOut}
-            className="w-full p-2 mt-6 bg-black text-white rounded hover:bg-gray-800 transition-colors"
-          >
-            Logout
-          </button>
+            <div className="text-center text-gray-700 mb-6">See you soon!</div>
+            <button
+              onClick={logOut}
+              className="w-full p-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
+            >
+              Logout
+            </button>
           </>
         )}
 
