@@ -293,6 +293,10 @@ Format the worksheet in a printable layout with clear sections and appropriate s
 
     try {
       const apiKey = import.meta.env.VITE_GPT_KEY;
+      if (!apiKey) {
+        throw new Error("API key is missing. Please check your environment variables.");
+      }
+      
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
       const res = await fetch(apiUrl, {
         method: 'POST',
@@ -306,7 +310,11 @@ Format the worksheet in a printable layout with clear sections and appropriate s
         })
       });
       
-      if (!res.ok) throw new Error(`API Error: ${res.status}`);
+      if (!res.ok) {
+        const errorData = await res.text();
+        throw new Error(`API Error: ${res.status} - ${res.statusText}. ${errorData}`);
+      }
+      
       const data = await res.json();
       const worksheetContent = data.choices[0].message.content;
       
@@ -333,6 +341,9 @@ Format the worksheet in a printable layout with clear sections and appropriate s
       }));
       
       setIsGeneratingWorksheet(false);
+      // Show success message
+      console.log("Worksheet generated successfully!");
+      
     } catch (error) {
       console.error('Error generating worksheet:', error);
       setError(error.message || 'Failed to generate worksheet.');
@@ -558,6 +569,60 @@ ${feedbackText}
                   <div className="space-y-4">
                     {formatLessonContent(lessons[selectedIndex]?.content)}
                   </div>
+                  
+                  {/* Worksheet Section */}
+                  {worksheets[`lesson_${selectedIndex}`] && (
+                    <div className="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-xl font-bold text-green-700 flex items-center">
+                          <FileText className="mr-2" size={24} />
+                          Generated Worksheet
+                        </h3>
+                        <button
+                          onClick={() => downloadWorksheet(selectedIndex)}
+                          className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200"
+                        >
+                          <Download className="w-4 h-4 mr-2" />
+                          Download
+                        </button>
+                      </div>
+                      
+                      <div className="bg-white rounded-lg p-4 border border-green-200 max-h-64 overflow-y-auto">
+                        <pre className="text-sm text-gray-700 whitespace-pre-wrap font-sans">
+                          {worksheets[`lesson_${selectedIndex}`].content}
+                        </pre>
+                      </div>
+                      
+                      <p className="text-green-600 text-sm mt-2">
+                        Generated on: {(() => {
+                          const createdAt = worksheets[`lesson_${selectedIndex}`].createdAt;
+                          if (createdAt) {
+                            // Handle Firestore Timestamp
+                            if (createdAt.toDate && typeof createdAt.toDate === 'function') {
+                              return createdAt.toDate().toLocaleDateString();
+                            }
+                            // Handle regular Date object
+                            if (createdAt instanceof Date) {
+                              return createdAt.toLocaleDateString();
+                            }
+                            // Handle date string
+                            if (typeof createdAt === 'string') {
+                              return new Date(createdAt).toLocaleDateString();
+                            }
+                          }
+                          return 'Unknown date';
+                        })()}
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* Error Display */}
+                  {error && (
+                    <div className="mt-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg flex items-center">
+                      <span className="text-red-500 mr-2">⚠️</span>
+                      {error}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

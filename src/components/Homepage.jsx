@@ -49,8 +49,7 @@ export default function Homepage() {
   const stats = [
     { number: "69.13%", label: "of total schools in India are government schools" },
     { number: "54%", label: "of the total student population in the country study in government schools" },
-    { number: "44.8%", label: "of Grade V students in government schools can read Grade 2-level texts" },
-    { number: "1000+", label: "Teachers Empowered" }
+    { number: "44.8%", label: "of Grade V students in government schools can read Grade 2-level texts" }
   ];
 
   return (
@@ -71,7 +70,6 @@ export default function Homepage() {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-600 hover:text-yellow-600 transition-colors">Features</a>
               <a href="#mission" className="text-gray-600 hover:text-yellow-600 transition-colors">Mission</a>
-              <a href="#impact" className="text-gray-600 hover:text-yellow-600 transition-colors">Impact</a>
               <a href="#about" className="text-gray-600 hover:text-yellow-600 transition-colors">About</a>
               <button
                 onClick={() => navigate('/login')}
@@ -96,7 +94,6 @@ export default function Homepage() {
               <div className="flex flex-col space-y-4">
                 <a href="#features" className="text-gray-600 hover:text-yellow-600 transition-colors">Features</a>
                 <a href="#mission" className="text-gray-600 hover:text-yellow-600 transition-colors">Mission</a>
-                <a href="#impact" className="text-gray-600 hover:text-yellow-600 transition-colors">Impact</a>
                 <a href="#about" className="text-gray-600 hover:text-yellow-600 transition-colors">About</a>
                 <button
                   onClick={() => navigate('/login')}
@@ -164,13 +161,10 @@ export default function Homepage() {
                 <span>Start Creating Lessons</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="border-2 border-yellow-400 text-yellow-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-50 hover:border-yellow-500 transition-all duration-200">
-                Watch Demo
-              </button>
             </div>
 
             {/* Hero Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-yellow-100">
                   <div className="text-3xl md:text-4xl font-bold text-yellow-600 mb-2">{stat.number}</div>
@@ -323,41 +317,21 @@ export default function Homepage() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
+          <div className="grid md:grid-cols-1 gap-8">
+            <div className="text-center">
+              <div className="flex items-center justify-center space-x-2 mb-4">
                 <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg p-2">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-bold">iLesson</span>
               </div>
-              <p className="text-gray-300 mb-4 max-w-md">
+              <p className="text-gray-300 mb-4 max-w-md mx-auto">
                 Empowering teachers to create personalized, inclusive learning experiences 
                 for underprivileged children worldwide.
               </p>
               <p className="text-sm text-gray-400">
                 Rooted in Classrooms. Powered by Code.
               </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Platform</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Support</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Documentation</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Our Mission</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-yellow-400 transition-colors">Careers</a></li>
-              </ul>
             </div>
           </div>
           
