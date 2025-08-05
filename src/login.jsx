@@ -93,85 +93,85 @@ function Login() {
           <p className="text-gray-600">Welcome back! Please sign in to continue.</p>
         </div>
       
-        {!LoggedIn && 
-        <>
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">
-            {isSignIn ? "Sign In" : "Sign Up"}
-          </h2>
-
-          {!LoggedIn && (
-            <button
-              onClick={signInWithGoogle}
-              className="w-full p-3 border-2 border-orange-200 font-medium text-orange-700 rounded-lg mb-4 hover:bg-orange-50 transition-colors"
-            >
-              Sign in with Google
-            </button>
-          )}
-
-          <input
-            aria-label="Email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
-          />
-          <input
-            aria-label="Password"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
-          />
-
-          {isSignIn ? (
+            {!LoggedIn && 
             <>
-              <button
-                onClick={signIn}
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">
+          {isSignIn ? "Sign In" : "Sign Up"}
+        </h2>
+
+        {!LoggedIn && (
+          <button
+            onClick={signInWithGoogle}
+              className="w-full p-3 border-2 border-orange-200 font-medium text-orange-700 rounded-lg mb-4 hover:bg-orange-50 transition-colors"
+          >
+            Sign in with Google
+          </button>
+        )}
+
+        <input
+          aria-label="Email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+        />
+        <input
+          aria-label="Password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+        />
+
+        {isSignIn ? (
+          <>
+            <button
+              onClick={signIn}
                 className="w-full p-3 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
-              >
+            >
                 Sign In
-              </button>
+            </button>
               <div className="text-center text-sm text-gray-600">
-                New user?{" "}
-                <button
+              New user?{" "}
+              <button
                   onClick={() => setIsSignIn(false)}
                   className="text-orange-600 hover:text-orange-800 hover:underline font-medium"
-                >
-                  Sign up
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={signUp}
-                className="w-full p-3 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
               >
-                Sign Up
+                Sign up
               </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={signUp}
+                className="w-full p-3 mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
+            >
+              Sign Up
+            </button>
               <div className="text-center text-sm text-gray-600">
-                Already Registered?{" "}
-                <button
+              Already Registered?{" "}
+              <button
                   onClick={() => setIsSignIn(true)}
                   className="text-orange-600 hover:text-orange-800 hover:underline font-medium"
-                >
-                  Sign in
-                </button>
-              </div>
-            </>
+              >
+                Sign in
+              </button>
+            </div>
+          </>
           )}
         </>}
 
         {LoggedIn && (
           <>
             <div className="text-center text-gray-700 mb-6">See you soon!</div>
-            <button
-              onClick={logOut}
+          <button
+            onClick={logOut}
               className="w-full p-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all font-medium"
-            >
-              Logout
-            </button>
+          >
+            Logout
+          </button>
           </>
         )}
 
