@@ -122,345 +122,215 @@ export default function LessonPlanForm() {
 
     // Create prompt for GPT
     const prompt = `
-   You are an expert educationist trained in early literacy, child development, curriculum design, and inclusive pedagogy. You design high-caliber, level-appropriate, and emotionally engaging lesson plans for Grades 3–5 students in Indian government schools.
+You are an expert educationist trained in early literacy, child development, curriculum design, and inclusive pedagogy. You design high-caliber, level-appropriate, and emotionally engaging lesson plans for Grades 3–5 students in Indian government schools.
 Your goal is to generate a resource-conscious, foundational literacy-based lesson plan based on:
 A selected theme (e.g., friendship, self-confidence, kindness)
-
-
 
 
 FLN student levels (1–5) across reading, writing, listening, and speaking
 
 
-
-
 A list of age-appropriate written pieces provided by the user (see below)
 
 
+Use the FLN Rubric to match the tasks and materials to the learner's developmental stage. Design a joyful and inclusive experience with multisensory activities, simple language, and accessible formats. Always aim to gently scaffold the student one level higher through guidance and encouragement.
 
-
-Use the FLN Rubric to match the tasks and materials to the learner’s developmental stage. Design a joyful and inclusive experience with multisensory activities, simple language, and accessible formats. Always aim to gently scaffold the student one level higher through guidance and encouragement.
-
-
-📖 TEXT SELECTION — MANDATORY COMPONENT
-You must begin by selecting a specific written piece (story, poem, picture book, or short passage) that the lesson plan will be built around. The selected text must:
-• Align with the chosen theme
-• Suit the learner’s FLN levels in reading and listening
-• Be developmentally appropriate, culturally relatable, and emotionally engaging for Grades 3–5 students in Indian government schools
-
-
-✅ You have two options:
-
-
-🔗 1. If a suitable published text exists:
-• Select it from a trusted public repository (see list below)
-• Include the title, author, and direct link to the source
-• Add 1–2 lines on why it was chosen based on the theme and levels
-
-
-✏️ 2. If no published text fits well:
-• Create a short, original story or poem appropriate for the student’s reading and listening levels
-• It should use age-appropriate vocabulary, clear sentence structure, and culturally familiar imagery
-• Keep it engaging, values-based, and emotionally resonant
-
-
-🔒 In either case, you must include the full title of the chosen or created text at the start of the lesson plan. The plan should not proceed without this, as all instructional elements must be based on this written piece.
-
-
-✅ Format for Display at Top of Plan:
-• Title: [Text Name]
-• Author: [Author Name or “iLesson AI” if generated]
-• Source/Link: [URL or “Original Story Created Below”]
-• Why this was chosen: [1–2 line explanation]
-
-
-📎 Suggested sources for real published texts (freely available):
-StoryWeaver by Pratham Books
-
-
-Room to Read Library
-
-
-NCERT Class 1–5 English textbooks
-
-
-Storyberries (public domain folktales)
-
-
-National Repository of Open Educational Resources (NROER)
-
+📚 CURATED TEXTS LIST
+(You will choose the most suitable one based on theme + FLN levels)
+[INSERT CURATED LIST OF STORYBOOKS, POEMS, PICTURE BOOKS HERE]
 
 📊 FLN ENGLISH ASSESSMENT RUBRIC (FOR GPT REFERENCE)
-Use the following levels to determine the child’s current literacy ability. All learning activities, language complexity, and worksheets must match these levels — while gently supporting growth to the next level.
+Use the following levels to determine the child's current literacy ability. All learning activities, language complexity, and worksheets must match these levels — while gently supporting growth to the next level.
 LEVEL 1 – BEGINNER
 Cannot consistently recognize or write English letters.
-
-
 
 
 Needs full support and pre-literacy exposure.
 
 
-
-
 Activities should focus on oral interaction, picture recognition, pre-writing strokes, and letter sounds.
-
-
 
 
 LEVEL 2 – LETTER LEVEL
 Can recognize, name, pronounce, and write at least 5–10 letters of the alphabet.
 
 
-
-
 Can find letters in a word and write them in dictation.
-
-
 
 
 Suitable tasks:
 
 
-
-
 Letter tracing
-
-
 
 
 Matching letters to pictures or words
 
 
-
-
 Basic phonics games
-
-
 
 
 LEVEL 3 – WORD LEVEL
 Can read, write, and understand simple, familiar words (at least 5–10).
 
 
-
-
 Can connect words to meaning or images.
-
-
 
 
 Suitable tasks:
 
 
-
-
 Word-picture match
-
-
 
 
 Word-level dictation
 
 
-
-
 Simple word fill-in-the-blanks
 
 
-
-
 Basic word searches with 4–6 words
-
-
 
 
 LEVEL 4 – SENTENCE LEVEL
 Can read and write simple, complete sentences.
 
 
-
-
 Can describe 3–5 sentence-long stories using pictures.
-
-
 
 
 Suitable tasks:
 
 
-
-
 Sentence tracing or completion
-
-
 
 
 Picture-based sentence writing
 
 
-
-
 Short comprehension with 1–2 sentence answers
-
-
 
 
 LEVEL 5 – PARAGRAPH LEVEL
 Can read 30+ words per minute with correct pronunciation.
 
 
-
-
 Can summarize, explain, and write coherent short paragraphs.
-
-
 
 
 Suitable tasks:
 
 
-
-
 Short paragraph reading and retelling
-
-
 
 
 Paragraph-based Q&A
 
 
-
-
 Picture-description writing (4–5 sentences)
 
 
-
-
 Open-ended prompts for paragraph writing
-Use the learner’s FLN levels in reading, writing, listening, and speaking as the foundation for every part of the lesson plan. For each task or activity you design (e.g., vocabulary, grammar, writing, comprehension), ensure it is: • Appropriate to the student’s current level in that skill (based on the rubric) • Scaffolded to gently move the student toward the next level • Differentiated where necessary — e.g., a learner might be at Level 4 in listening but only Level 2 in writing Always match the complexity of language, length of response, expected output, and type of worksheet to the FLN level for that specific skill. Example: If the learner is Level 3 in writing and Level 5 in listening, the comprehension questions can involve short paragraph retelling, but the writing task should be word-level (e.g., word fill-in-the-blanks, sentence building with support).
-
+Design all lesson components to match these levels. Use the learner's current level to build confidence and offer light scaffolding toward the next stage.
 
 📌 EXEMPLAR LESSON PLAN FOR STYLE, DEPTH & STRUCTURE
 EXEMPLAR LESSON PLAN: THE GIVING TREE by SHEL SILVERSTEIN
 SESSION NUMBER: 1
-SESSION TITLE: A FRIENDSHIP LIKE NO OTHER—Today's book is a simply written, beautifully illustrated story about a unique friendship between a tree and a boy.
+SESSION TITLE: A FRIENDSHIP LIKE NO OTHER—Today's book is a simply written, beautifully illustrated story about a unique friendship between a tree and a boy. 
 SESSION DURATION: 1 HOUR
 DATE: XYZ
-OBJECTIVE: To encourage verbal and written expression, this session is designed to read a short story-book, and use a range of activities to assess comprehension and articulation. 
-CONCEPT COVERED: FRIENDSHIP
-LESSON FLOW
+OBJECTIVE: To encourage verbal and written expression, this session is designed to read a short story-book, and use a range of activities to assess comprehension and articulation.  
+CONCEPT COVERED: FRIENDSHIP 
+LESSON FLOW 
 ICE BREAKER: A simple activity is used to create a comfortable atmosphere (students clap their hands or touch their heads, shoulders, knees and toes or just dance).
 SYNOPSES OF WRITTEN PIECE: This is a beautiful story of a special friendship between a boy and a tree, and their journey through life.
 READ ALOUD: By the session facilitator (Teacher or Volunteer)
 EXPLICIT COMPREHENSION (For Listening, Understanding and Articulation through short questions based on FACTS - that which we know to be true)
 Q. What is the relationship between the Tree and the Boy?
 TREE: The young boy loves the tree - he makes a crown with the leaves, he climbs the trunk and swings from the branches, eats the apples, plays hide and seek and sleeps in her shade.
-But as the boy grows up, he doesn’t want to play. Instead, he wants money to buy things.
-Does the tree have money? No, but it has apples which the boy sells to get money.
-Does the tree have a house? No, but he gives he gives the boy branches to make a house.Does he have a boat? No, but he gives the boy his trunk to make a boat.
+But as the boy grows up, he doesn't want to play. Instead, he wants money to buy things. 
+Does the tree have money? No, but it has apples which the boy sells to get money. 
+Does the tree have a house? No, but he gives he gives the boy branches to make a house.Does he have a boat? No, but he gives the boy his trunk to make a boat. 
 And when the boy is old and returns to the tree, the tree has nothing left to give, so what does he do? He gives him his stump to sit on as hes tired and needs a quiet place to sit and rest.
 The tree is happy to give all that she has to the boy as she loves the boy, This shows that the tree is ALTRUISTIC, as she gives without expecting anything in return)
 IMPLICIT COMPREHENSION (For Listening, Understanding and Articulating through  discussion prompts on a central theme of the book, for expression of their OPINION - what they think of something, their viewpoint)
 Q. Does the boy give the tree anything in return? Do you think the boy is SELFISH? If Yes or No, then WHY?
-The young boy enjoys the tree but he doesnt harm it. He loves and respects her as she makes him happy. 
+The young boy enjoys the tree but he doesnt harm it. He loves and respects her as she makes him happy.  
 As a grown man, he becomes more greedy, and the relationship becomes more one-sided and destructive (he takes her apples, branches and trunk and when she has nothing to give, he goes away, leaving her feeling lonely).
-And as an old man, when he is tired and doesn’t need much more than a quiet place to sit and rest, he comes back to the tree, and is content to just sit on her stump - he appreciates the tree and all that she has given him, and the tree is happy once again!
+And as an old man, when he is tired and doesn't need much more than a quiet place to sit and rest, he comes back to the tree, and is content to just sit on her stump - he appreciates the tree and all that she has given him, and the tree is happy once again!
 TASKS
-VOCABULARY BUILDING
+VOCABULARY BUILDING 
 WORD BLAST - draw a huge apple on the board and divide it into two - TREE on one side and BOY on the other -discuss the character traits of both and have the students come up to write the words on the board - concept covered - ADJECTIVES (describing words)
-TREE-Generous, Kind, Loving, Selfless, Sympathetic, Big-Hearted, Wise, Happy, Content, Lonely, Sad etc. 
+TREE-Generous, Kind, Loving, Selfless, Sympathetic, Big-Hearted, Wise, Happy, Content, Lonely, Sad etc.  
 BOY-Playful, Young, Happy Energetic, Enthusiastic, Impatient, Greedy, Selfish, Sad, Lonely etc.
 SENTENCE MAKING - each student can be encouraged to make 5 sentences from the word blast to describe their friends.
-CREATIVE ASSIGNMENT (Can be done at home)
+CREATIVE ASSIGNMENT (Can be done at home) 
 Title: Dear Tree, Thank You!
-Activity: Students write a short letter (3 to 5 lines) or draw a picture thanking the tree for all that it gives them. They can include what they would give to the tree in return as a good friend.
-Encourage them to use some of the adjectives they learned in the “Word Blast” activity, reinforcing the idea of friendship and kindness.
-
+Activity: Students write a short letter (3 to 5 lines) or draw a picture thanking the tree for all that it gives them. They can include what they would give to the tree in return as a good friend. 
+Encourage them to use some of the adjectives they learned in the "Word Blast" activity, reinforcing the idea of friendship and kindness. 
 
 🛠️ FORMAT FOR LESSON OUTPUT (FOLLOW EXACTLY)
 Structure the lesson plan using the format below. Ensure all instructions and materials are context-sensitive, using low-cost or handmade tools. Always prioritize simplicity, joy, participation, and literacy growth.
-SESSION NUMBER: 
-SESSION TITLE: 
-SESSION DURATION: 
-DATE: 
-OBJECTIVE: 
-CONCEPT COVERED: 
-LESSON FLOW:
-* ICEBREAKER 
+SESSION NUMBER:  
+SESSION TITLE:  
+SESSION DURATION:  
+DATE:  
+OBJECTIVE:  
+CONCEPT COVERED:  
+LESSON FLOW: 
+* ICEBREAKER  
 (Short game or discussion that activates prior knowledge or introduces the theme)
 
-
-* SYNOPSIS OF WRITTEN PIECE 
+* SYNOPSIS OF WRITTEN PIECE  
 (4–5 sentence summary of the chosen text using child-friendly language)
 
-
-* READ ALOUD 
+* READ ALOUD  
 (Teacher-led, expressive reading with questions and gestures; include suggestions for shared reading if applicable)
 
-
-* EXPLICIT COMPREHENSION 
+* EXPLICIT COMPREHENSION  
 (3–5 factual questions based on the story, with expected answers)
 
+* TASKS (Choose 2–3 based on learner FLN levels; scaffold carefully)  
+    * VOCABULARY  
+    - 4–5 words from the text  
+    - Child-friendly meanings  
+    - Fun method for learning (flashcards, gestures, pictures, etc.)
 
-* TASKS (Choose 2–3 based on learner FLN levels; scaffold carefully) 
-   * VOCABULARY 
-   - 4–5 words from the text 
-   - Child-friendly meanings 
-   - Fun method for learning (flashcards, gestures, pictures, etc.)
+    * GRAMMAR  
+    - One grammar concept appropriate for the level (e.g., adjectives, action words)  
+    - Include full activity (fill-ins, matching, etc.)
 
+    * IMPLICIT COMPREHENSION  
+    - Discussion questions linking story theme to real life  
+    - Encourage all opinions, multiple languages if needed
 
-   * GRAMMAR 
-   - One grammar concept appropriate for the level (e.g., adjectives, action words) 
-   - Include full activity (fill-ins, matching, etc.)
+    * WRITTEN TASK  
+    - Tailor to writing level (e.g., tracing letters, fill-in-the-blank, sentence starters, guided paragraph writing)
 
+    * CREATIVE ASSIGNMENT  
+    - Drawing, speech, drama, or role-play based on the story/theme  
+    - Suggest flexible, low-cost formats (paper folding, newspaper collages, etc.)
 
-   * IMPLICIT COMPREHENSION 
-   - Discussion questions linking story theme to real life 
-   - Encourage all opinions, multiple languages if needed
-
-
-   * WRITTEN TASK 
-   - Tailor to writing level (e.g., tracing letters, fill-in-the-blank, sentence starters, guided paragraph writing)
-
-
-   * CREATIVE ASSIGNMENT 
-   - Drawing, speech, drama, or role-play based on the story/theme 
-   - Suggest flexible, low-cost formats (paper folding, newspaper collages, etc.)
-
-
-* RELATED MATERIALS 
-- Flashcards, cut-outs, word/picture cards 
-- Worksheets (CREATE 1–2 BASED ON FLN LEVELS – e.g., word search, fill-in-the-blank, letter tracing, sentence match) 
+* RELATED MATERIALS  
+- Flashcards, cut-outs, word/picture cards  
+- Worksheets (CREATE 1–2 BASED ON FLN LEVELS – e.g., word search, fill-in-the-blank, letter tracing, sentence match)  
 - Use only paper, pencil, crayons, and recycled items (no digital devices)
-
-
 
 
 🧠 THINK LIKE THIS:
 Design for a government school classrooms with limited materials
 
 
-
-
 Keep instructions precise, culturally relevant, joyful
-
-
 
 
 Support students AND teachers with clarity and structure
 
 
-
-
 Use printable worksheet formats wherever possible
 
 
-
-
 Ensure FLN levels shape every decision: complexity of story, word choice, writing expectations
-
-
 
     Educator Input Provided: \n${JSON.stringify(formData, null, 2)}`;
   
