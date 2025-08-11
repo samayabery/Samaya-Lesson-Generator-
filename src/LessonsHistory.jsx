@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc, arrayUnion, arrayRemove, serverTimestamp } from
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Loader2, FileText, Download, Sparkles, BookOpen, Feather, Home, HelpCircle } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
 
 export default function LessonsHistory() {
   const [uid, setUid] = useState(null);
@@ -132,7 +133,7 @@ export default function LessonsHistory() {
           borderColor: 'border-orange-200',
           shadowColor: 'shadow-orange-100'
         },
-        'SYNOPSIS': {
+        'STORY': {
           bg: 'bg-gradient-to-br from-yellow-50 to-orange-50',
           textColor: 'text-yellow-800',
           icon: '📖',
@@ -229,17 +230,17 @@ export default function LessonsHistory() {
         );
       }
       
-      // Regular content lines
+      // Regular content lines with markdown rendering
       return (
         <div key={index} className={`text-sm ${config.textColor} leading-relaxed`}>
-          {line.replace(/\*+/g, '').trim()}
+          <ReactMarkdown>{line.trim()}</ReactMarkdown>
         </div>
       );
     };
     
     // Process content line by line
     lines.forEach((line, index) => {
-      const sectionMatch = line.match(/^(SESSION TITLE|SESSION NUMBER|SESSION DURATION|DATE|OBJECTIVE|CONCEPT COVERED|LESSON FLOW|ICEBREAKER|SYNOPSIS|READ ALOUD|EXPLICIT COMPREHENSION|IMPLICIT COMPREHENSION|TASKS|VOCABULARY|GRAMMAR|CREATIVE ASSIGNMENT|RELATED MATERIALS):/i);
+      const sectionMatch = line.match(/^(SESSION TITLE|SESSION NUMBER|SESSION DURATION|DATE|OBJECTIVE|CONCEPT COVERED|LESSON FLOW|ICEBREAKER|STORY|READ ALOUD|EXPLICIT COMPREHENSION|IMPLICIT COMPREHENSION|TASKS|VOCABULARY|GRAMMAR|CREATIVE ASSIGNMENT|RELATED MATERIALS):/i);
       
       if (sectionMatch) {
         // Render previous section if exists
@@ -588,9 +589,9 @@ ${feedbackText}
                       </div>
                       
                       <div className="bg-white rounded-lg p-4 border border-green-200 max-h-64 overflow-y-auto">
-                        <pre className="text-sm text-gray-700 whitespace-pre-wrap font-sans">
-                          {worksheets[`lesson_${selectedIndex}`].content}
-                        </pre>
+                        <div className="text-sm text-gray-700 font-sans">
+                          <ReactMarkdown>{worksheets[`lesson_${selectedIndex}`].content}</ReactMarkdown>
+                        </div>
                       </div>
                       
                       <p className="text-green-600 text-sm mt-2">

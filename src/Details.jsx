@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, BookOpen, FileText, FilePlus, Pencil, Mic, Clock, Layers, LayoutList, Text, Info, Loader2, Home, HelpCircle } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
 
 export default function LessonPlanForm() {
   const apiKey = import.meta.env.VITE_GPT_KEY;
@@ -243,7 +244,7 @@ OBJECTIVE: To encourage verbal and written expression, this session is designed 
 CONCEPT COVERED: FRIENDSHIP 
 LESSON FLOW 
 ICE BREAKER: A simple activity is used to create a comfortable atmosphere (students clap their hands or touch their heads, shoulders, knees and toes or just dance).
-SYNOPSES OF WRITTEN PIECE: This is a beautiful story of a special friendship between a boy and a tree, and their journey through life.
+STORY OF WRITTEN PIECE: This is a beautiful story of a special friendship between a boy and a tree, and their journey through life.
 READ ALOUD: By the session facilitator (Teacher or Volunteer)
 EXPLICIT COMPREHENSION (For Listening, Understanding and Articulation through short questions based on FACTS - that which we know to be true)
 Q. What is the relationship between the Tree and the Boy?
@@ -281,8 +282,8 @@ LESSON FLOW:
 * ICEBREAKER  
 (Short game or discussion that activates prior knowledge or introduces the theme)
 
-* SYNOPSIS OF WRITTEN PIECE  
-(4–5 sentence summary of the chosen text using child-friendly language)
+* STORY OF WRITTEN PIECE  
+GIVE ENTIRE  STORY IN ATLEAST 5-6 PARAGRAPHS, the story, idea and the entire summary should be enough to explain the kid what the entire writing is and like what does the story say
 
 * READ ALOUD  
 (Teacher-led, expressive reading with questions and gestures; include suggestions for shared reading if applicable)
@@ -674,7 +675,9 @@ Ensure FLN levels shape every decision: complexity of story, word choice, writin
           {generatedPlan && (
             <div className="mt-10 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg shadow-lg border border-yellow-100">
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Generated Lesson Plan</h3>
-              <pre className="whitespace-pre-wrap text-gray-700 font-mono text-sm">{generatedPlan}</pre>
+              <div className="text-gray-700 text-sm">
+                <ReactMarkdown>{generatedPlan}</ReactMarkdown>
+              </div>
               <button
                 onClick={() => navigate('/lessons')}
                 className="mt-6 px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:from-yellow-600 hover:to-orange-600 transition-all shadow-lg font-medium"
