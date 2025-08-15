@@ -124,6 +124,8 @@ export default function LessonPlanForm() {
     // Create prompt for GPT
     const prompt = `
 You are an expert educationist trained in early literacy, child development, curriculum design, and inclusive pedagogy. You design high-caliber, level-appropriate, and emotionally engaging lesson plans for Grades 3–5 students in Indian government schools.
+CRITICAL REQUIREMENT: Each lesson plan MUST include a full 1000-2000 word original story (not a synopsis or summary).
+IMPORTANT: DO NOT use markdown formatting (asterisks *, **, #, ##, etc.) in your response. Use plain text only for all sections.
 Your goal is to generate a resource-conscious, foundational literacy-based lesson plan based on:
 A selected theme (e.g., friendship, self-confidence, kindness)
 
@@ -244,7 +246,7 @@ OBJECTIVE: To encourage verbal and written expression, this session is designed 
 CONCEPT COVERED: FRIENDSHIP 
 LESSON FLOW 
 ICE BREAKER: A simple activity is used to create a comfortable atmosphere (students clap their hands or touch their heads, shoulders, knees and toes or just dance).
-STORY OF WRITTEN PIECE: This is a beautiful story of a special friendship between a boy and a tree, and their journey through life.
+STORY OF WRITTEN PIECE: [NOTE: YOUR STORY MUST BE MUCH MORE DETAILED AND COMPLETE - 1000-2000 WORDS IN LENGTH - THAN THIS SUMMARY]
 READ ALOUD: By the session facilitator (Teacher or Volunteer)
 EXPLICIT COMPREHENSION (For Listening, Understanding and Articulation through short questions based on FACTS - that which we know to be true)
 Q. What is the relationship between the Tree and the Boy?
@@ -270,7 +272,8 @@ Title: Dear Tree, Thank You!
 Activity: Students write a short letter (3 to 5 lines) or draw a picture thanking the tree for all that it gives them. They can include what they would give to the tree in return as a good friend. 
 Encourage them to use some of the adjectives they learned in the "Word Blast" activity, reinforcing the idea of friendship and kindness. 
 
-🛠️ FORMAT FOR LESSON OUTPUT (FOLLOW EXACTLY)
+🛠️ FORMAT FOR LESSON OUTPUT (FOLLOW EXACTLY) - REMEMBER: FULL 1000-2000 WORD STORY REQUIRED
+IMPORTANT: DO NOT use markdown formatting (like *, **, #, ##, etc.) in your response. Use plain text only.
 Structure the lesson plan using the format below. Ensure all instructions and materials are context-sensitive, using low-cost or handmade tools. Always prioritize simplicity, joy, participation, and literacy growth.
 SESSION NUMBER:  
 SESSION TITLE:  
@@ -282,8 +285,14 @@ LESSON FLOW:
 * ICEBREAKER  
 (Short game or discussion that activates prior knowledge or introduces the theme)
 
-* STORY OF WRITTEN PIECE  
-GIVE ENTIRE  STORY IN ATLEAST 5-6 PARAGRAPHS, the story, idea and the entire summary should be enough to explain the kid what the entire writing is and like what does the story say
+* STORY OF WRITTEN PIECE [FULL 1000-2000 WORD STORY REQUIRED]  
+MANDATORY: GENERATE A COMPLETE, ENGAGING 1000-2000 WORD STORY (NOT A SYNOPSIS OR SUMMARY). 
+- This must be a fully developed narrative with clear beginning, middle, and end
+- Include age-appropriate characters, dialogue, and rich descriptive language
+- The story must align with the selected theme and be tailored to the specified grade level
+- Include proper story elements: setting, characters, conflict, and resolution
+- DO NOT PROVIDE A SYNOPSIS OR SUMMARY - write the ACTUAL COMPLETE STORY that will be read to students
+- Story length requirement: Minimum 1000 words, Maximum 2000 words
 
 * READ ALOUD  
 (Teacher-led, expressive reading with questions and gestures; include suggestions for shared reading if applicable)
@@ -360,7 +369,7 @@ Ensure FLN levels shape every decision: complexity of story, word choice, writin
             "Authorization": `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: "gpt-4-turbo",
+            model: "gpt-4o",
             messages: [{ role: "user", content: prompt }]
           })
         });
@@ -676,7 +685,7 @@ Ensure FLN levels shape every decision: complexity of story, word choice, writin
             <div className="mt-10 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg shadow-lg border border-yellow-100">
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Generated Lesson Plan</h3>
               <div className="text-gray-700 text-sm">
-                <ReactMarkdown>{generatedPlan}</ReactMarkdown>
+                <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>{generatedPlan}</pre>
               </div>
               <button
                 onClick={() => navigate('/lessons')}

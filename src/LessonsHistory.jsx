@@ -230,10 +230,10 @@ export default function LessonsHistory() {
         );
       }
       
-      // Regular content lines with markdown rendering
+      // Regular content lines with plain text
       return (
         <div key={index} className={`text-sm ${config.textColor} leading-relaxed`}>
-          <ReactMarkdown>{line.trim()}</ReactMarkdown>
+          {line.trim()}
         </div>
       );
     };
@@ -306,7 +306,7 @@ Format the worksheet in a printable layout with clear sections and appropriate s
           'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({ 
-          model: 'gpt-4-turbo', 
+          model: 'gpt-4o', 
           messages: [{ role: 'user', content: prompt }] 
         })
       });
@@ -391,7 +391,7 @@ ${feedbackText}
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${apiKey}`
         },
-        body: JSON.stringify({ model: 'gpt-4-turbo', messages: [{ role: 'user', content: prompt }] })
+        body: JSON.stringify({ model: 'gpt-4o', messages: [{ role: 'user', content: prompt }] })
       });
       if (!res.ok) throw new Error(`API Error: ${res.status}`);
       const data = await res.json();
@@ -590,7 +590,7 @@ ${feedbackText}
                       
                       <div className="bg-white rounded-lg p-4 border border-green-200 max-h-64 overflow-y-auto">
                         <div className="text-sm text-gray-700 font-sans">
-                          <ReactMarkdown>{worksheets[`lesson_${selectedIndex}`].content}</ReactMarkdown>
+                          <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>{worksheets[`lesson_${selectedIndex}`].content}</pre>
                         </div>
                       </div>
                       
